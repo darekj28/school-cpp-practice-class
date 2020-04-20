@@ -2,18 +2,23 @@
 #include <iostream>
 using namespace std;
 
-HashMap::HashMap(const int& capac){
-  capacity_ = capac;
+HashMap::HashMap(const int capacity){
+  capacity_ = capacity;
   hashed_index_vector_(capacity_,vector<pair<int,int>>);
 }
 
-int HashMap:: hashFunction(const int& key) const{
+int HashMap::hash(const int& key) const{
   return key % capacity_;
 }
   
-bool HashMap::insert(const int& key, const int& value){
+bool HashMap::insert(const int key, const int value){
   vector<pair<int,int>> currList = hashed_index_vector_[hashFunction(key)];
-  if (currList.size() == 0){
+  if (size() == capacity_) {
+    // Raise exception for being at max capacity.
+    // Ideally we would resize.
+    cout << "Hashmap at max capacity."
+  }
+  if (size() == 0){
     currList.push_back(make_pair(key,value));
     size_+=1;
     return false;
@@ -43,6 +48,6 @@ int HashMap::find(const int& key, bool* found) const{
   return 0;
 }
 
-int HashMap::getSize() const{
-  return this->size_;
+int HashMap::size() const{
+  return size_;
 }
