@@ -7,20 +7,21 @@ Node::Node(const int& val)
   {}
 
 Stack::Stack(){
-  top = NULL;
+  top_ = NULL;
 }
 
 Stack::Stack(const Stack& oldStack){
   
-  Node* oldNode = oldStack.top;
+  Node* oldNode = oldStack.top_;
   Node* currNode = NULL;
+  size_ = oldStack.size();
   
   while (oldNode != NULL){
     Node* newNode = new Node(oldNode->value);
     newNode->next = oldNode->next;
     if (currNode == NULL){
-      top = newNode;
-      currNode = top;
+      top_ = newNode;
+      currNode = top_;
     }
     else{
       currNode->next = newNode;
@@ -33,7 +34,7 @@ Stack::Stack(const Stack& oldStack){
 
 int Stack::peek() const{
   if (!isEmpty()){
-    return top->value;
+    return top_->value;
   }
   cout << "Error: Attempted to peek from an empty stack\n";
   return 0;
@@ -41,9 +42,12 @@ int Stack::peek() const{
 
 void Stack::pop(){
   if (!isEmpty()){
-    Node* temp = top;
-    top = top->next;
+    const int return_val = peek();
+    Node* temp = top_;
+    top_ = top_->next;
+    size--;
     delete temp;
+    return return_val;
   }
   else{
     // Could also just throw an error here	
@@ -52,17 +56,22 @@ void Stack::pop(){
 }
 
 void Stack::push(const int& val){
+  size_++;
   Node* newNode = new Node(val);
-  newNode->next = top;
-  top = newNode;
+  newNode->next = top_;
+  top_ = newNode;
 }
 
 bool Stack::isEmpty() const{
-  return (top == NULL);
+  return (top_ == NULL);
+}
+
+int Stack::size() const {
+  return size_;
 }
 
 Stack::~Stack(){
-  Node* curr = top;
+  Node* curr = top_;
   while(curr != NULL){
     Node* temp = curr;
     curr = curr->next;

@@ -1,21 +1,22 @@
 Singleton* Singleton::instance = 0;
 
 Singleton::Singleton(){
-  data = 0;
+  has_been_initialized_ = true;
+  data_ = 0;
 }
 
 Singleton* Singleton::createObj(){
-  if (instance == 0){
-    instance = new Singleton();
+  if (!has_been_initialized_){
+    instance_ = new Singleton();
   }
   return instance;
 }
 
-Singleton::getData(){
-  return this->data;
+Singleton::getData() const {
+  return data_;
 }
 
 Singleton::setData(const int& data){
-  this->data = data;
+  data_ = data;
 }
 
