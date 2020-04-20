@@ -3,6 +3,7 @@
 #include <assert.h>
 
 
+// Tests for find_parity.
 int main() {
 	assert(findParity(7) == true);
 	assert(findParity(8) == true);
