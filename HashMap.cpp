@@ -2,19 +2,20 @@
 #include <iostream>
 using namespace std;
 
-HashMap::HashMap(){
-  hashed_index_vector_(hashSize,vector<pair<int,int>>);
+HashMap::HashMap(const int& capac){
+  capacity_ = capac;
+  hashed_index_vector_(capacity_,vector<pair<int,int>>);
 }
 
 int HashMap:: hashFunction(const int& key) const{
-  return key % hashSize;
+  return key % capacity_;
 }
   
 bool HashMap::insert(const int& key, const int& value){
   vector<pair<int,int>> currList = hashed_index_vector_[hashFunction(key)];
   if (currList.size() == 0){
     currList.push_back(make_pair(key,value));
-    size+=1;
+    size_+=1;
     return false;
   }
   else{
@@ -25,7 +26,7 @@ bool HashMap::insert(const int& key, const int& value){
       }
     }
     currList.push_back(make_pair(key,value));
-    size+=1;
+    size_+=1;
     return true;
   }  
 }
@@ -43,5 +44,5 @@ int HashMap::find(const int& key, bool* found) const{
 }
 
 int HashMap::getSize() const{
-  return this->size;
+  return this->size_;
 }
