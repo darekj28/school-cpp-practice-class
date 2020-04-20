@@ -1,3 +1,5 @@
+/* Basic stack implementation using LinkedList */
+
 #include <iostream>
 using namespace std;
 

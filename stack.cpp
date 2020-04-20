@@ -1,7 +1,6 @@
+#include "stack.h"
 #include <iostream>
 using namespace std;
-
-#include "Stack.h"
 
 Node::Node(const int& val)
   : value(val)
@@ -47,6 +46,7 @@ void Stack::pop(){
     delete temp;
   }
   else{
+    // Could also just throw an error here	
     cout << "Error: Attempted to pop from an empty stack\n";
   }
 }
