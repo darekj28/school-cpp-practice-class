@@ -1,3 +1,7 @@
+/* Hashmap implemented using a vector of key-value pairs.
+   Separate chaining is used for collisions 
+ */
+
 #include <iostream>
 using namespace std;
 
