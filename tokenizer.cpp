@@ -34,6 +34,9 @@ vector<string> tokenize(const string& s){
     else{
       if (!isValidChar(s[i])){
         myList.push_back(s.substr(start,count));
+        while (!isValidChar(s[i+1])) {
+            i++;
+        }
         start = -1;
         count = 1;
       }
