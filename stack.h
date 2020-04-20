@@ -1,27 +1,26 @@
 #include <iostream>
 using namespace std;
 
+struct Node{
+  int value;
+  Node* next;
+  Node(const int& val);
+};
+
 class Stack{
   
-  struct Node{
-    int value;
-    Node* next;
-    Node(const int& val){
-      value(val);
-  };
-  
-  Node* top;
+  private:
+    Node* top;
   
   public:
     
-    Stack(){
-      top = NULL
-    }
-  
-  int peek();
-  void pop();
-  void push(cons int& val);
-  bool isEmpty();
-  
-};
+    Stack();
+    Stack(const Stack& oldStack);  
+    int peek() const;
+    void pop();
+    void push(const int& val);
+    bool isEmpty() const;
     
+    ~Stack();
+};
+

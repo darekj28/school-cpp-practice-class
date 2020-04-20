@@ -1,4 +1,9 @@
-int HashMap:: hashFunction(const int& key){
+#include <iostream>
+using namespace std;
+
+#include "HashMap.h"
+
+int HashMap:: hashFunction(const int& key) const{
   return key % vector.size();
 }
   
@@ -20,14 +25,14 @@ bool HashMap::insert(const int& key, const int& value){
   }  
 }
   
-int HashMap::find(const int& key, bool& found){
+int HashMap::find(const int& key, bool* found){
   vector<pair<int,int>> currList= map[hashFunction(key)];
   for (auto it = currList.begin(); it < currList.end(); it++){
     if (it->first == key){
-      found = true;
+      *found = true;
       return it->second;
     }
   }
-  found = false;
+  *found = false;
   return 0;
 }

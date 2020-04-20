@@ -7,7 +7,7 @@ class HashMap{
   HashMap(){
   }
   
-  int hashFunction(const int& key);
+  int hashFunction(const int& key) const;
   bool insert(const int& key, const int& value);
   int find(const int& key);
   
