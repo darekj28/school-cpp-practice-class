@@ -1,19 +1,23 @@
+#include "HashMap.h"
 #include <iostream>
 using namespace std;
 
-#include "HashMap.h"
+HashMap::HashMap(){
+  hashed_index_vector_(hashSize,vector<pair<int,int>>);
+}
 
 int HashMap:: hashFunction(const int& key) const{
-  return key % vector.size();
+  return key % hashSize;
 }
   
 bool HashMap::insert(const int& key, const int& value){
-  int index = hashFunction(key);
-  if (map[index].size() == 0){
-    map[index].push_back(make_pair(key,value))
+  vector<pair<int,int>> currList = hashed_index_vector_[hashFunction(key)];
+  if (currList.size() == 0){
+    currList.push_back(make_pair(key,value));
+    size+=1;
     return false;
+  }
   else{
-    vector<pair<int,int>> currList = map[index];
     for (auto it = currList.begin(); it< currList.end(); it++){
       if(it->first == key){
         it->second = value;
@@ -21,12 +25,13 @@ bool HashMap::insert(const int& key, const int& value){
       }
     }
     currList.push_back(make_pair(key,value));
+    size+=1;
     return true;
   }  
 }
   
-int HashMap::find(const int& key, bool* found){
-  vector<pair<int,int>> currList= map[hashFunction(key)];
+int HashMap::find(const int& key, bool* found) const{
+  vector<pair<int,int>> currList= hashed_index_vector_[hashFunction(key)];
   for (auto it = currList.begin(); it < currList.end(); it++){
     if (it->first == key){
       *found = true;
@@ -35,4 +40,8 @@ int HashMap::find(const int& key, bool* found){
   }
   *found = false;
   return 0;
+}
+
+int HashMap::getSize() const{
+  return this->size;
 }

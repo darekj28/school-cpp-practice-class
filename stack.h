@@ -15,11 +15,12 @@ class Stack{
   public:
     
     Stack();
-	
+    Stack(const Stack& oldStack);  
     int peek() const;
     void pop();
-    void push(cons int& val);
+    void push(const int& val);
     bool isEmpty() const;
-  
-};
     
+    ~Stack();
+};
+
